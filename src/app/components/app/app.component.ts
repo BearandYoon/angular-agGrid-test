@@ -13,8 +13,8 @@ import { VideoThumbnailRendererComponent } from '../video-thumbnail-renderer/vid
 })
 export class AppComponent implements OnInit {
   gridData: Observable<AgGridDTO[]>;
-  totalCounts: 0;
-  selectedCounts: 0;
+  totalCounts = 0;
+  selectedCounts = 0;
   selectionMode = false;
 
   gridApi;
@@ -30,12 +30,13 @@ export class AppComponent implements OnInit {
         field: 'thumbnail',
         cellRenderer: 'videoThumbnailRenderer',
         colId: 'params',
-        maxWidth: 120,
+        suppressSizeToFit: true,
         autoHeight: true
       },
       {
         headerName: 'Published on',
-        field: 'publishedAt'
+        field: 'publishedAt',
+        suppressSizeToFit: true
       },
       {
         headerName: 'Video Title',
@@ -59,6 +60,7 @@ export class AppComponent implements OnInit {
   }
 
   transformData(data: any[]) {
+    this.totalCounts = data.length;
     return data.map(item => {
       return {
         videoId: item.id.videoId,
@@ -73,7 +75,7 @@ export class AppComponent implements OnInit {
   onGridReady(params) {
     this.gridApi = params.api;
     this.gridColumnApi = params.columnApi;
-    this.gridColumnApi.autoSizeColumns([ 'title',  'description' ]);
+    this.gridApi.sizeColumnsToFit();
   }
 
   onChangeSelectionMode(event) {
@@ -89,5 +91,10 @@ export class AppComponent implements OnInit {
     }
 
     this.gridApi.setColumnDefs(this.columnDefs);
+    this.gridApi.sizeColumnsToFit();
+  }
+
+  getSelectedRows(event) {
+    this.selectedCounts = this.gridApi.getSelectedRows().length;
   }
 }

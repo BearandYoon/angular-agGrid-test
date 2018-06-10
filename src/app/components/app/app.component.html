@@ -23,6 +23,7 @@
     rowSelection="multiple"
     [context]="context"
     [frameworkComponents]="frameworkComponents"
+    (selectionChanged)="getSelectedRows($event)"
     (gridReady)="onGridReady($event)">
   </ag-grid-angular>
 </div>
