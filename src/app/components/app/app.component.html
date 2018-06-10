@@ -1,0 +1,28 @@
+<div class="toolbar-container">
+  <div class="selection-mode-container">
+    <label>
+      Selection Mode:
+    </label>
+    <ui-switch size="small" (change)="onChangeSelectionMode($event)" [(ngModel)]="selectionMode"></ui-switch>
+  </div>
+  <div>
+    <span>Total Counts: {{totalCounts}}</span>
+  </div>
+  <div>
+    <span>Selected Records Counts: {{selectedCounts}}</span>
+  </div>
+</div>
+<div class="ag-grid-container">
+  <ag-grid-angular
+    style="width: 100%; height: 100%;"
+    class="ag-theme-balham"
+    [enableSorting]="true"
+    [enableFilter]="true"
+    [rowData]="gridData | async"
+    [columnDefs]="columnDefs"
+    rowSelection="multiple"
+    [context]="context"
+    [frameworkComponents]="frameworkComponents"
+    (gridReady)="onGridReady($event)">
+  </ag-grid-angular>
+</div>
