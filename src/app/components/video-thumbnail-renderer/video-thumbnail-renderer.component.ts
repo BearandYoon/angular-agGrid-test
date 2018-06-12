@@ -28,7 +28,6 @@ export class VideoThumbnailRendererComponent implements OnInit, ICellRendererAng
   }
 
   showVideo() {
-    console.log(this.videoId);
     const videoUrl = `https://www.youtube.com/watch?v=${this.videoId}`;
     window.open(videoUrl, '_blank');
   }

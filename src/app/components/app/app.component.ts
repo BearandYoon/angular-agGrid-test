@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
+import 'ag-grid-enterprise';
+
 import { AppService } from '../../services/app.service';
 import { AgGridDTO } from '../../interfaces/ag-grid-data-dto';
 import { VideoThumbnailRendererComponent } from '../video-thumbnail-renderer/video-thumbnail-renderer.component';
@@ -96,5 +98,20 @@ export class AppComponent implements OnInit {
 
   getSelectedRows(event) {
     this.selectedCounts = this.gridApi.getSelectedRows().length;
+  }
+
+  getContextMenuItems(params) {
+    const result = [
+      {
+        name: 'Open in new tab',
+        action: function() {
+          window.open(`https://www.youtube.com/watch?v=${params.node.data.videoId}`, '_blank');
+          }
+      },
+      'copy',
+      'copyWithHeaders',
+      'paste'
+    ];
+    return result;
   }
 }

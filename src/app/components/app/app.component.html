@@ -24,6 +24,7 @@
     [context]="context"
     [frameworkComponents]="frameworkComponents"
     (selectionChanged)="getSelectedRows($event)"
+    [getContextMenuItems]="getContextMenuItems"
     (gridReady)="onGridReady($event)">
   </ag-grid-angular>
 </div>
