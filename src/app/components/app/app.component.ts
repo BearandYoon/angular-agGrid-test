@@ -101,17 +101,16 @@ export class AppComponent implements OnInit {
   }
 
   getContextMenuItems(params) {
-    const result = [
-      {
+    const result = [];
+    if (params.column.colId === 'title') {
+      result.push({
         name: 'Open in new tab',
         action: function() {
           window.open(`https://www.youtube.com/watch?v=${params.node.data.videoId}`, '_blank');
           }
-      },
-      'copy',
-      'copyWithHeaders',
-      'paste'
-    ];
+      });
+    }
+    result.push('copy', 'copyWithHeaders', 'paste');
     return result;
   }
 }
